@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #ffffff;
+  color: #333333;
+}
+
+h1, h2, h3 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+}
+
+@layer components {
+  .input-field {
+    @apply w-full px-4 py-3 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-rose-200 bg-white transition-all duration-200 text-gray-800 placeholder-gray-400;
+  }
+
+  .input-field:focus {
+    @apply border-rose-300;
+  }
+
+  .button-primary {
+    @apply px-6 py-3 bg-gradient-to-r from-rose-200 to-pink-200 text-gray-800 font-medium rounded-2xl hover:shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .button-secondary {
+    @apply px-6 py-3 bg-gray-100 text-gray-800 font-medium rounded-2xl hover:bg-gray-200 transition-all duration-300;
+  }
+
+  .card-service {
+    @apply p-6 border-2 border-gray-200 rounded-2xl cursor-pointer transition-all duration-300 hover:shadow-md hover:border-rose-200;
+  }
+
+  .card-service.active {
+    @apply border-rose-300 bg-rose-50 shadow-lg;
+  }
+
+  .checkbox-wrapper {
+    @apply flex items-center gap-3 py-3;
+  }
+
+  .custom-checkbox {
+    @apply w-5 h-5 rounded-lg cursor-pointer accent-rose-200;
+  }
+
+  .progress-step {
+    @apply flex items-center justify-center w-8 h-8 rounded-full text-sm font-medium transition-all duration-300;
+  }
+
+  .progress-step.active {
+    @apply bg-rose-200 text-white;
+  }
+
+  .progress-step.completed {
+    @apply bg-rose-100 text-gray-700;
+  }
+
+  .progress-step.pending {
+    @apply bg-gray-100 text-gray-400;
+  }
+}
