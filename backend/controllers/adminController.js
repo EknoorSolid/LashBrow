@@ -5,15 +5,20 @@ const jwt = require("jsonwebtoken");
 const SECRET = process.env.JWT_SECRET || "mysecretkey";
 
 exports.login = async (req, res) => {
-    const { username, password } = req.body;
+    try {
+        const { username, password } = req.body;
 
-    const admin = await Admin.findOne({ username });
-    if (!admin) return res.status(400).json({ msg: "Invalid username" });
+        const admin = await Admin.findOne({ username });
+        if (!admin) return res.status(400).json({ msg: "Invalid username" });
 
-    const isMatch = await bcrypt.compare(password, admin.password);
-    if (!isMatch) return res.status(400).json({ msg: "Invalid password" });
+        const isMatch = await bcrypt.compare(password, admin.password);
+        if (!isMatch) return res.status(400).json({ msg: "Invalid password" });
 
-    const token = jwt.sign({ id: admin._id }, SECRET, { expiresIn: "1h" });
+        const token = jwt.sign({ id: admin._id }, SECRET, { expiresIn: "1h" });
 
-    res.json({ token });
+        res.json({ token });
+    } catch (error) {
+        console.error("Login error:", error);
+        res.status(500).json({ msg: "Server error during login" });
+    }
 };

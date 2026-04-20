@@ -12,8 +12,13 @@ exports.submitForm = async (req, res) => {
 };
 
 exports.getForms = async (req, res) => {
-    const data = await Form.find().sort({ createdAt: -1 });
-    res.json(data);
+    try {
+        const data = await Form.find().sort({ createdAt: -1 });
+        res.json(data);
+    } catch (error) {
+        console.error("Error fetching forms:", error);
+        res.status(500).json({ msg: "Server error fetching forms" });
+    }
 };
 
 exports.exportCSV = async (req, res) => {
